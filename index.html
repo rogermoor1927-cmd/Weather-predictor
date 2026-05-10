@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather Predictor</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+<body>
+
+  <div class="background"></div>
+
+  <div class="container">
+
+    <div class="weather-card glass">
+
+      <h1>🌤 Weather Predictor</h1>
+
+      <div class="search-box">
+        <input type="text" id="cityInput" placeholder="Enter city name..." />
+        <button id="searchBtn">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+
+      <div class="weather-info">
+
+        <h2 id="cityName">City Name</h2>
+
+        <div class="temp-section">
+          <img id="weatherIcon" src="" alt="Weather Icon" />
+          <h1 id="temperature">--°C</h1>
+        </div>
+
+        <p id="description">Weather Description</p>
+
+        <div class="details">
+
+          <div class="detail-box glass-small">
+            <i class="fas fa-water"></i>
+            <p>Humidity</p>
+            <span id="humidity">--%</span>
+          </div>
+
+          <div class="detail-box glass-small">
+            <i class="fas fa-wind"></i>
+            <p>Wind</p>
+            <span id="wind">-- km/h</span>
+          </div>
+
+          <div class="detail-box glass-small">
+            <i class="fas fa-temperature-high"></i>
+            <p>Feels Like</p>
+            <span id="feelsLike">--°C</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
