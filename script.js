@@ -3,7 +3,7 @@
 // =============================
 
 // Replace this with your real API key
-const API_KEY = "YOUR_API_KEY_HERE";
+const API_KEY = "7fece579eb1f6f08ae3231fd07eac4da";
 
 // =============================
 // ELEMENTS
@@ -19,6 +19,7 @@ const humidity = document.getElementById("humidity");
 const wind = document.getElementById("wind");
 const feelsLike = document.getElementById("feelsLike");
 const weatherIcon = document.getElementById("weatherIcon");
+const message = document.getElementById("message");
 
 // =============================
 // FETCH WEATHER DATA
@@ -26,7 +27,14 @@ const weatherIcon = document.getElementById("weatherIcon");
 
 async function getWeather(city) {
 
+  if (!API_KEY || API_KEY === "YOUR_API_KEY_HERE") {
+    showMessage("Please set your OpenWeather API key in script.js");
+    return;
+  }
+
   try {
+
+    showMessage("Loading...");
 
     const url =
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
@@ -34,7 +42,8 @@ async function getWeather(city) {
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error("City not found");
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.message || "City not found");
     }
 
     const data = await response.json();
@@ -43,7 +52,7 @@ async function getWeather(city) {
 
   } catch (error) {
 
-    alert(error.message);
+    showMessage(error.message);
 
   }
 }
@@ -65,8 +74,9 @@ function updateWeatherUI(data) {
   humidity.textContent =
     `${data.main.humidity}%`;
 
+  // OpenWeather returns wind speed in m/s — convert to km/h
   wind.textContent =
-    `${data.wind.speed} km/h`;
+    `${Math.round(data.wind.speed * 3.6)} km/h`;
 
   feelsLike.textContent =
     `${Math.round(data.main.feels_like)}°C`;
@@ -75,6 +85,11 @@ function updateWeatherUI(data) {
 
   weatherIcon.src =
     `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+}
+
+function showMessage(text) {
+  if (!message) return;
+  message.textContent = text || "";
 }
 
 // =============================

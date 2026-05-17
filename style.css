@@ -73,6 +73,13 @@ body {
   color: rgba(255,255,255,0.7);
 }
 
+.message {
+  margin-top: 8px;
+  color: #ffdede;
+  font-size: 0.95rem;
+  min-height: 1.2em;
+}
+
 .search-box button {
   width: 55px;
   border: none;
